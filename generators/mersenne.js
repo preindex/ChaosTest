@@ -14,5 +14,3 @@ export function mersenne(low, high, seed) {
     }
     return value;
 }
-
-console.log(mersenne(5, 10))

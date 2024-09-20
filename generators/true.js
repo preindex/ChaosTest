@@ -25,5 +25,3 @@ export async function trueRandom(low, high, max) {
 
     return Numbers;
 }
-
-console.log(await trueRandom(5, 10, 3))

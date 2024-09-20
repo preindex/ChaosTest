@@ -1,0 +1,67 @@
+import {basic} from './generators/basic';
+import { mersenne } from './generators/mersenne';
+import { trueRandom } from './generators/true';
+import {quantumRandom} from './generators/quantum';
+import { logisticMap } from './systems/logisticMap';
+
+let Maps = []
+
+{ // Linear
+    const x0 = 0.5; // Initial population
+    const iterations = 100; // Number of iterations
+    let Map = []
+    for (var r = 3.5; r < 4; r+=0.034) { // 15x = 3.5
+        Map.push([r, x0, iterations, logisticMap(r, x0, iterations)])
+    }
+    console.log("Linear Maps done.")
+    Maps.push(Map)
+}
+
+{ // Basic
+    const x0 = 0.5; // Initial population
+    const iterations = 100; // Number of iterations
+    let Map = []
+    for (var i = 0; i < 15; i++) {
+        const r = basic(3, 4)
+        Map.push([r, x0, iterations, logisticMap(r, x0, iterations)])
+    }
+    console.log("Basic Maps done.")
+    Maps.push(Map)
+}
+
+{ // mersenne
+    const x0 = 0.5; // Initial population
+    const iterations = 100; // Number of iterations
+    let Map = []
+    for (var i = 0; i < 15; i++) {
+        Map.push(logisticMap(mersenne(3, 4), x0, iterations))
+    }
+    console.log("Mersenne Maps done.")
+    Maps.push(Map)
+}
+
+{ // true
+    const x0 = 0.5; // Initial population
+    const iterations = 100; // Number of iterations
+    let Map = []
+    let Numbers = trueRandom(3, 4, 15)
+    for (let i = 0; i < 15; i++){
+        let r = Numbers[i]
+        Map.push([r, x0, iterations, logisticMap(r, x0, iterations)])
+    }
+    console.log("True Maps done.")
+    Maps.push(Map)
+}
+
+{ // quantum
+    const x0 = 0.5; // Initial population
+    const iterations = 100; // Number of iterations
+    let Map = []
+    let Numbers = quantumRandom(3, 4, 15)
+    for (let i = 0; i < 15; i++){
+        let r = Numbers[i]
+        Map.push(logisticMap([r, x0, iterations, logisticMap(r, x0, iterations)]))
+    }
+    console.log("Quantum Maps done.")
+    Maps.push(Map)
+}
