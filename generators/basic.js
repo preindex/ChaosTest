@@ -5,5 +5,5 @@
 */
 
 export function basic(low, high) {
-    return Math.round(Math.random() * (high - low) + low)
+    return (Math.random() * (high - low) + low)
 }
