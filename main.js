@@ -46,9 +46,10 @@ let Maps = []
     const x0 = 0.5; // Initial population
     const iterations = 100; // Number of iterations
     let Map = []
-    let Numbers = trueRandom(3, 4, 15)
-    for (let i = 0; i < 15; i++){
+    let Numbers = await trueRandom(3, 4, 15)
+    for (let i = 0; i < Numbers.length; i++){
         let r = Numbers[i]
+        console.log(r)
         Map.push([r, x0, iterations, logisticMap(r, x0, iterations)])
     }
     console.log("True Maps done.")
@@ -59,10 +60,11 @@ let Maps = []
     const x0 = 0.5; // Initial population
     const iterations = 100; // Number of iterations
     let Map = []
-    let Numbers = quantumRandom(3, 4, 15)
-    for (let i = 0; i < 15; i++){
+    let Numbers = await quantumRandom(3, 4, 15)
+    for (let i = 0; i < Numbers.length; i++){
         let r = Numbers[i]
-        Map.push(logisticMap([r, x0, iterations, logisticMap(r, x0, iterations)]))
+        console.log(r)
+        Map.push([r, x0, iterations, logisticMap(r, x0, iterations)])
     }
     console.log("Quantum Maps done.")
     Maps.push(Map.join("\n------------[Quantum Maps]-------------------\n"))
