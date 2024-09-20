@@ -24,7 +24,7 @@ let Maps = []
     const iterations = 100; // Number of iterations
     let Map = []
     for (var i = 0; i < 15; i++) {
-        const r = basic(3, 4)
+        const r = basic(3.5, 4)
         Map.push([r, x0, iterations, logisticMap(r, x0, iterations)])
     }
     console.log("Basic Maps done.")
@@ -36,7 +36,7 @@ let Maps = []
     const iterations = 100; // Number of iterations
     let Map = []
     for (var i = 0; i < 15; i++) {
-        Map.push(logisticMap(mersenne(3, 4), x0, iterations))
+        Map.push(logisticMap(mersenne(3.5, 4), x0, iterations))
     }
     console.log("Mersenne Maps done.")
     Maps.push(Map.join("\n------------[Mersenne Maps]-------------------\n"))
@@ -46,7 +46,7 @@ let Maps = []
     const x0 = 0.5; // Initial population
     const iterations = 100; // Number of iterations
     let Map = []
-    let Numbers = await trueRandom(3, 4, 15)
+    let Numbers = await trueRandom(3.5, 4, 15)
     for (let i = 0; i < Numbers.length; i++){
         let r = Numbers[i]
         console.log(r)
@@ -60,7 +60,7 @@ let Maps = []
     const x0 = 0.5; // Initial population
     const iterations = 100; // Number of iterations
     let Map = []
-    let Numbers = await quantumRandom(3, 4, 15)
+    let Numbers = await quantumRandom(3.5, 4, 15)
     for (let i = 0; i < Numbers.length; i++){
         let r = Numbers[i]
         console.log(r)
