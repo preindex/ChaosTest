@@ -3,6 +3,7 @@ import { mersenne } from './generators/mersenne';
 import { trueRandom } from './generators/true';
 import {quantumRandom} from './generators/quantum';
 import { logisticMap } from './systems/logisticMap';
+import { randomUUID } from 'crypto';
 
 const fs = require('fs');
 
@@ -63,11 +64,10 @@ let Maps = []
     let Numbers = await quantumRandom(3.5, 4, 15)
     for (let i = 0; i < Numbers.length; i++){
         let r = Numbers[i]
-        console.log(r)
         Map.push([r, x0, iterations, logisticMap(r, x0, iterations)])
     }
     console.log("Quantum Maps done.")
     Maps.push(Map.join("\n------------[Quantum Maps]-------------------\n"))
 }
 
-fs.writeFileSync("data.txt", Maps.join("\n"));
+fs.writeFileSync(`data/${randomUUID()}.txt`, Maps.join("\n"));
