@@ -10,7 +10,6 @@
 // Function to count digits
 function divide(n) {
     if (n == 0) return 0;
-    let count = 0;
     while (n > 1) {
         n = n / 10
     }
@@ -20,11 +19,6 @@ function divide(n) {
 export async function quantumRandom(low, high, max) {
     const URL = 'https://qrandom.io/api/random/ints';
     const Params = new URLSearchParams({
-        min: low || 1,
-        max: high || 10,
-        n: max || 1
-    });
-    const DecimalParams = new URLSearchParams({
         min: 0,
         max: 214748364,
         n: max || 1
@@ -32,16 +26,12 @@ export async function quantumRandom(low, high, max) {
     const Response = await fetch(`${URL}?${Params.toString()}`, {
         method: 'GET'
     });
-    const Decimals = await fetch(`${URL}?${DecimalParams.toString()}`, {
-        method: 'GET'
-    });
     if (!Response.ok) {
         throw new Error(`HTTP error! status: ${Response.status} ${Response.statusText}`);
     }
     let Numbers = (await Response.json()).numbers
-    let DecimalData = (await Decimals.json()).numbers
-    for (let i = 0; i < DecimalData.length; i++) {
-        Numbers[i] = low + divide(DecimalData[i])
+    for (let i = 0; i < Numbers.length; i++) {
+        Numbers[i] = divide(Numbers[i]) * (high - low) + low
     }
     // console.log(DecimalData)
     return Numbers;
