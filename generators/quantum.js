@@ -1,6 +1,7 @@
 /*
     quantumRandom
     Generates a random number given a range using quantum principles.
+    Utilizes the qrandom.io API. I don't have a quantum computer lying around.
 */
 
 export async function quantumRandom(low, high, max) {

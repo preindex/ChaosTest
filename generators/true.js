@@ -6,5 +6,24 @@
 */
 
 export async function trueRandom(low, high, max) {
-    return (await fetch(`https://www.random.org/integers/?num=${max || 1}&min=${low}&max=${high}&col=1&base=10&format=plain&rnd=new`)).text()
+    let Numbers = []
+    const N = low == high ? high : (await fetch(`https://www.random.org/integers/?num=${max || 1}&min=${low}&max=${high}&col=1&base=10&format=plain&rnd=new`)).text()
+    const D = (await fetch(`https://www.random.org/decimal-fractions/?num=${max || 1}&dec=15&col=1&format=plain&rnd=new`)).text();
+
+    (await N).split('\n').forEach(element => {
+        Numbers.push(parseInt(element))
+    });
+
+    {
+        let Index = 0;
+        (await D).split('\n').forEach(element => {
+            Numbers[Index] = Numbers[Index++] + parseFloat(element);
+        })
+    }
+    
+    Numbers.pop()
+
+    return Numbers;
 }
+
+console.log(await trueRandom(5, 10, 3))
