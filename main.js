@@ -4,6 +4,8 @@ import { trueRandom } from './generators/true';
 import {quantumRandom} from './generators/quantum';
 import { logisticMap } from './systems/logisticMap';
 
+const fs = require('fs');
+
 let Maps = []
 
 { // Linear
@@ -11,10 +13,10 @@ let Maps = []
     const iterations = 100; // Number of iterations
     let Map = []
     for (var r = 3.5; r < 4; r+=0.034) { // 15x = 3.5
-        Map.push([r, x0, iterations, logisticMap(r, x0, iterations)])
+        Map.push([r, x0, iterations, `"${logisticMap(r, x0, iterations).toString()}`].join(', '))
     }
     console.log("Linear Maps done.")
-    Maps.push(Map)
+    Maps.push(Map.join("\n------------[Linear Maps]-------------------\n"))
 }
 
 { // Basic
@@ -26,7 +28,7 @@ let Maps = []
         Map.push([r, x0, iterations, logisticMap(r, x0, iterations)])
     }
     console.log("Basic Maps done.")
-    Maps.push(Map)
+    Maps.push(Map.join("\n------------[Basic Maps]-------------------\n"))
 }
 
 { // mersenne
@@ -37,7 +39,7 @@ let Maps = []
         Map.push(logisticMap(mersenne(3, 4), x0, iterations))
     }
     console.log("Mersenne Maps done.")
-    Maps.push(Map)
+    Maps.push(Map.join("\n------------[Mersenne Maps]-------------------\n"))
 }
 
 { // true
@@ -50,7 +52,7 @@ let Maps = []
         Map.push([r, x0, iterations, logisticMap(r, x0, iterations)])
     }
     console.log("True Maps done.")
-    Maps.push(Map)
+    Maps.push(Map.join("\n------------[True Maps]-------------------\n"))
 }
 
 { // quantum
@@ -63,5 +65,7 @@ let Maps = []
         Map.push(logisticMap([r, x0, iterations, logisticMap(r, x0, iterations)]))
     }
     console.log("Quantum Maps done.")
-    Maps.push(Map)
+    Maps.push(Map.join("\n------------[Quantum Maps]-------------------\n"))
 }
+
+fs.writeFileSync("data.txt", Maps.join("\n"));
