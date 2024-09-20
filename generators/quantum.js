@@ -41,7 +41,7 @@ export async function quantumRandom(low, high, max) {
     let Numbers = (await Response.json()).numbers
     let DecimalData = (await Decimals.json()).numbers
     for (let i = 0; i < DecimalData.length; i++) {
-        Numbers[i] += divide(DecimalData[i])
+        Numbers[i] = low + divide(DecimalData[i])
     }
     // console.log(DecimalData)
     return Numbers;
