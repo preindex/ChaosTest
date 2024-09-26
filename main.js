@@ -17,7 +17,7 @@ let Maps = []
         Map.push([r, x0, iterations, `"${logisticMap(r, x0, iterations).toString()}`].join(', '))
     }
     console.log("Linear Maps done.")
-    Maps.push(Map.join("\n------------[Linear Maps]-------------------\n"))
+    Maps.push(Map)
 }
 
 { // Basic
@@ -29,7 +29,7 @@ let Maps = []
         Map.push([r, x0, iterations, logisticMap(r, x0, iterations)])
     }
     console.log("Basic Maps done.")
-    Maps.push(Map.join("\n------------[Basic Maps]-------------------\n"))
+    Maps.push(Map)
 }
 
 { // mersenne
@@ -40,7 +40,7 @@ let Maps = []
         Map.push(logisticMap(mersenne(3.5, 4), x0, iterations))
     }
     console.log("Mersenne Maps done.")
-    Maps.push(Map.join("\n------------[Mersenne Maps]-------------------\n"))
+    Maps.push(Map)
 }
 
 { // true
@@ -54,7 +54,7 @@ let Maps = []
         Map.push([r, x0, iterations, logisticMap(r, x0, iterations)])
     }
     console.log("True Maps done.")
-    Maps.push(Map.join("\n------------[True Maps]-------------------\n"))
+    Maps.push(Map)
 }
 
 { // quantum
@@ -67,7 +67,7 @@ let Maps = []
         Map.push([r, x0, iterations, logisticMap(r, x0, iterations)])
     }
     console.log("Quantum Maps done.")
-    Maps.push(Map.join("\n------------[Quantum Maps]-------------------\n"))
+    Maps.push(Map)
 }
 
 fs.writeFileSync(`data/${randomUUID()}.txt`, Maps.join("\n"));
