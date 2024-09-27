@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "mersenne-twister": "^1.1.0"
+    "@tainakanchu/mann-whitney-utest": "^1.1.0",
+    "csv-parse": "^5.5.6",
+    "jstat": "^1.9.6",
+    "mersenne-twister": "^1.1.0",
+    "regression": "^2.0.1"
   }
 }
