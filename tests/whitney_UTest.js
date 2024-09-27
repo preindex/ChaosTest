@@ -1,6 +1,6 @@
 const utest = require('@tainakanchu/mann-whitney-utest')
 
-export async function whitney_UTest(map) {
+export function whitney_UTest(map) {
     const G1 = map.slice(0, 50)
     const G2 = map.slice(50, 100)
 

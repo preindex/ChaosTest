@@ -1,6 +1,6 @@
 const jstat = require('jstat');
 
-export async function calculateConfidenceInterval(data, confidenceLevel = 0.95) {
+export function calculateConfidenceInterval(data, confidenceLevel = 0.95) {
     const n = data.length;
     const mean = jstat.mean(data);
     const standardError = jstat.stdev(data) / Math.sqrt(n);
