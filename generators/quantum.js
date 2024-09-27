@@ -2,13 +2,10 @@
     quantumRandom
     Generates a random number given a range using quantum principles.
     Utilizes the qrandom.io API. I don't have a quantum computer lying around.
+    I'm not THAT rich, you know!
 */
 
-// Iterative JavaScript program to count
-// number of digits in a number
-
-// Function to count digits
-function divide(n) {
+function divide(n) { // Any number inputted is divided until it's less than 1.
     if (n == 0) return 0;
     while (n > 1) {
         n = n / 10
@@ -31,6 +28,8 @@ export async function quantumRandom(low, high, max) {
     }
     let Numbers = (await Response.json()).numbers
     for (let i = 0; i < Numbers.length; i++) {
+        // Covnert the big numbers into small decimals using divide, then use the random formula.
+        // This however, can restrict the amount of values we get, and may not always be reliable.
         Numbers[i] = divide(Numbers[i]) * (high - low) + low
     }
     // console.log(DecimalData)
