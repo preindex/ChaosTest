@@ -6,6 +6,7 @@ import {logisticMap} from './systems/logisticMap';
 import {randomUUID} from 'crypto';
 import { whitney_UTest } from './tests/whitney_UTest';
 import { calculateConfidenceInterval } from './tests/confidenceInterval';
+import { regressionTest } from './tests/regression';
 
 const RUN_TRIALS = false;
 const RUN_TESTS = !RUN_TRIALS;
@@ -133,8 +134,9 @@ async function test(Name) {
         let Trial = 1;
         for (const string_json of data) {
             const [TYPE, R, INITIAL_VALUE, ITERATIONS, MAP] = JSON.parse(string_json)
-            console.log(`${TYPE} #${Trial} Mann-Whitney U Test (${R}): ${await whitney_UTest(MAP)}`)
-            console.log(`Confidence Inteval: ${await calculateConfidenceInterval(MAP)}`)
+            console.log(`${TYPE} #${Trial} Mann-Whitney U Test (${R}): ${whitney_UTest(MAP)}`)
+            console.log(`Confidence Interval: ${calculateConfidenceInterval(MAP)}`)
+            regressionTest(MAP)
             console.log(('-').repeat(99))
             Trial++
         } 
