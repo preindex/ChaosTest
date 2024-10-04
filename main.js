@@ -54,7 +54,8 @@ async function generateData() {
         let json_map = []
         for (let i = 0; i < 15; i++) {
             const r = basic(3.5, 4)
-            const RESULT_MAP = logisticMap(r, INITIAL_VALUE, ITERATIONS)
+            const noise = basic()
+            const RESULT_MAP = logisticMap(r, INITIAL_VALUE, ITERATIONS, noise)
             let Array = ["basic", r, INITIAL_VALUE, ITERATIONS, `"${RESULT_MAP}"`]
             Map.push(Array.join(', '))
             Array[4] = RESULT_MAP
@@ -70,8 +71,9 @@ async function generateData() {
         let json_map = []
         for (let i = 0; i < 15; i++) {
             const r = mersenne(3.5, 4)
+            const noise = mersenne()
             console.log("i wanna die: " + r)
-            const RESULT_MAP = logisticMap(r, INITIAL_VALUE, ITERATIONS)
+            const RESULT_MAP = logisticMap(r, INITIAL_VALUE, ITERATIONS, noise)
             let Array = ["mersenne", r, INITIAL_VALUE, ITERATIONS, `"${RESULT_MAP}"`]
             Map.push(Array.join(', '))
             Array[4] = RESULT_MAP
@@ -85,10 +87,11 @@ async function generateData() {
     { // true-randomized logistic maps
         let Map = []
         let json_map = []
-        let Numbers = await trueRandom(3.5, 4, 15)
+        let [Numbers, Noise] = await trueRandom(3.5, 4, 15)
         for (let i = 0; i < Numbers.length; i++){
             let r = Numbers[i]
-            const RESULT_MAP = logisticMap(r, INITIAL_VALUE, ITERATIONS)
+            let noise = Noise[i]
+            const RESULT_MAP = logisticMap(r, INITIAL_VALUE, ITERATIONS, noise)
             console.log(r)
             let Array = ["true", r, INITIAL_VALUE, ITERATIONS, `"${RESULT_MAP}"`]
             Map.push(Array.join(', '))
@@ -103,10 +106,11 @@ async function generateData() {
     { // quantum-randomized logistic maps
         let Map = []
         let json_map = []
-        let Numbers = await quantumRandom(3.5, 4, 15)
+        let [Numbers, Noise] = await quantumRandom(3.5, 4, 15)
         for (let i = 0; i < Numbers.length; i++){
             let r = Numbers[i]
-            const RESULT_MAP = logisticMap(r, INITIAL_VALUE, ITERATIONS)
+            let noise = Noise[i]
+            const RESULT_MAP = logisticMap(r, INITIAL_VALUE, ITERATIONS, noise)
             let Array = ["quantum", r, INITIAL_VALUE, ITERATIONS, `"${RESULT_MAP}"`]
             Map.push(Array.join(', '))
             Array[4] = RESULT_MAP

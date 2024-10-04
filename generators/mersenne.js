@@ -6,11 +6,8 @@
 
 const twister = require('mersenne-twister')
 
-export function mersenne(low, high, seed) {
-    var Generator = new twister(process.hrtime()[1]);
+export function mersenne(low = 0, high = 1, seed = process.hrtime()[1]) {
+    var Generator = new twister(seed);
     var value = Generator.random();
-    if (low != null & high != null) {
-        value = value * (high - low) + low
-    }
-    return value;
+    return value * (high - low) + low;
 }

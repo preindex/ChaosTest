@@ -4,8 +4,6 @@
     Well, at least it's more random; like when I hate on Maria.
 */
 
-export function basic(low, high) {
+export function basic(low = 0, high = 1) {
     return (Math.random() * (high - low) + low)
 }
-
-console.log(process.hrtime());

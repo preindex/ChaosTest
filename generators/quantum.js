@@ -20,7 +20,7 @@ export async function quantumRandom(low, high, max) {
         max: 214748364,
         n: max || 1
     })
-    const Response = await fetch(`${URL}?${Params.toString()}`, {
+    let Response = await fetch(`${URL}?${Params.toString()}`, {
         method: 'GET'
     });
     if (!Response.ok) {
@@ -32,6 +32,16 @@ export async function quantumRandom(low, high, max) {
         // This however, can restrict the amount of values we get, and may not always be reliable.
         Numbers[i] = divide(Numbers[i]) * (high - low) + low
     }
+    Response = await fetch(`${URL}?${Params.toString()}`, {
+        method: 'GET'
+    });
+    if (!Response.ok) {
+        throw new Error(`HTTP error! status: ${Response.status} ${Response.statusText}`);
+    }
+    let Noise = (await Response.json()).numbers
+    for (let i = 0; i < Noise.length; i++) {
+        Noise[i] = divide(Noise[i])
+    }
     // console.log(DecimalData)
-    return Numbers;
+    return [Numbers, Noise];
 }
