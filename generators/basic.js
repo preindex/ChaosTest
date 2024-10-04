@@ -7,3 +7,5 @@
 export function basic(low, high) {
     return (Math.random() * (high - low) + low)
 }
+
+console.log(process.hrtime());

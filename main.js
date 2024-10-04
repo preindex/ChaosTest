@@ -3,7 +3,7 @@ import {mersenne} from './generators/mersenne';
 import {trueRandom} from './generators/true';
 import {quantumRandom} from './generators/quantum';
 import {logisticMap} from './systems/logisticMap';
-import {randomUUID} from 'crypto';
+import {randomUUID, sign} from 'crypto';
 import { whitney_UTest } from './tests/whitney_UTest';
 import { calculateConfidenceInterval } from './tests/confidenceInterval';
 import { regressionTest } from './tests/regression';
@@ -124,7 +124,7 @@ async function generateData() {
 }
 
 async function test(Name) {
-    let Results = []
+    let Results = ["type, conf_lowerBound, conf_upperBound, CRITICAL_VALUE, U_VALUES, Significance, Correctness, R^2, Equation"]
     console.log(`Testing: ${Name}`)
     let file = JSON.parse(fs.readFileSync(`json_data/${Name}`))
     for (let typeIndex = 0; typeIndex < file.length; typeIndex++) {
@@ -134,9 +134,10 @@ async function test(Name) {
         let Trial = 1;
         for (const string_json of data) {
             const [TYPE, R, INITIAL_VALUE, ITERATIONS, MAP] = JSON.parse(string_json)
-            console.log(`${TYPE} #${Trial} Mann-Whitney U Test (${R}): ${whitney_UTest(MAP)}`)
-            console.log(`Confidence Interval: ${calculateConfidenceInterval(MAP)}`)
-            regressionTest(MAP)
+            const [lowerBound, upperBound] = calculateConfidenceInterval(MAP)
+            const [CRITICAL_VALUE, U_VALUES, Significance, Correctness] = whitney_UTest(MAP)
+            const regression = regressionTest(MAP)
+            Results.push([TYPE, lowerBound, upperBound, CRITICAL_VALUE, `"[${U_VALUES}]"`, Significance, Correctness, regression.r2, regression.string].join(','))
             console.log(('-').repeat(99))
             Trial++
         } 
